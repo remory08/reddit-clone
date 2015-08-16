@@ -15,11 +15,10 @@
   <nav>
     <h1>Reddit Clone</h1>
     <a ng-click="showForm()">Submit Post</a>
-    <input type="search" placeholder="Search">
-    <select  id="sortBy">
-      <option value="sortByVotes">Sort By Votes</option>
-      <option value="sortByTitle">Sort By Title</option>
-      <option value="sortByDate">Sort By Date</option>
+    <select  ng-model="sortBy">
+      <option value="votes">Sort By Votes</option>
+      <option value="title">Sort By Title</option>
+      <option value="date">Sort By Date</option>
     </select>
   </nav>
 
@@ -35,12 +34,13 @@
 
     <input type="submit" value="Submit Post">
   </form>
+  <input type="search" placeholder="Search" ng-model="search">
 
-  <div ng-repeat="post in posts">
+  <div ng-repeat="post in posts | filter:search | orderBy: sortBy ">
       <p><h3>{{post.title}} | <a ng-click="upVote(post.votes)"><i class="fa fa-arrow-up"></i></a> <a href=""><i class="fa fa-arrow-down"></i></a> {{post.votes}}</h3></p>
       <p><h5>{{post.author}}</h5></p>
       <p>{{post.foo}}</p>
-      <img ng-src="{{post.imageURL}}" alt="suck" height="100" width="100">
+      <img ng-src="{{post.imageURL}}" height="150" width="150">
       <p>{{post.date}} | {{post. comments}} | <a>Add Comment</a></p>
   </div>
 
