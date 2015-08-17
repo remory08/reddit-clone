@@ -1,3 +1,86 @@
+body {
+  background-color: white;
+}
+
+.post {
+  background-color: rgb(218, 218, 218);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  height: 200px;
+  margin-left: 10%;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
 .ng-cloak {
   display: none !important;
+}
+
+.css-form {
+  background-color: white;
+  width: 50%;
+  float: left;
+  padding: 30px;
+}
+
+.css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+    border: 2px solid red;
+  }
+
+.animate-enter {
+  -webkit-trainsition: 2s linear all;
+  transition: 2s linear all;
+  opacity: 0;
+}
+
+.animate-enter.animate-enter-active {
+  opacity: 1;
+}
+
+.animate-leave {
+  -webkit-trainsition: 2s linear all;
+  transition: 2s linear all;
+  opacity: 0;
+}
+
+.animate-leave.animate-leave-active {
+  opacity: 1;
+}
+
+h3, h1{
+  display: inline-block;
+
+}
+
+.image, .content {
+  float: left;
+}
+
+.image {
+  margin-right: 10px;
+}
+
+.grey {
+  color: rgb(145, 145, 145);
+}
+
+h1 {
+  margin-right: 50px;
+  margin-left: 10px;
+  color:rgb(145, 145, 145);
+
+}
+
+nav {
+  background-color: rgba(218,218,218, 0.5);
 }

@@ -14,34 +14,49 @@
 
   <nav>
     <h1>Reddit Clone</h1>
-    <a ng-click="showForm()">Submit Post</a>
+    <a class="grey" ng-click="showForm()"><i class="fa fa-plus"></i> Submit Post</a>
+    <input type="search" placeholder="Search" ng-model="search">
     <select  ng-model="sortBy">
-      <option value="votes">Sort By Votes</option>
+      <option value="">-- Sort By --</option>
+      <option value=-votes>Sort By Votes</option>
       <option value="title">Sort By Title</option>
       <option value="date">Sort By Date</option>
     </select>
   </nav>
 
-  <form  ng-show="form > 0" ng-submit="submit()">
-    <label for="title">Title</label>
-    <input type="text" id="title" placeholder="Title" ng-model="title">
-    <label for="author">Author</label>
-    <input type="text" id="author" placeholder="Author" ng-model="author">
-    <label for="imageURL">Image URL</label>
-    <input type="text" id="imageURL" placeholder="Image URL" ng-model="imageURL">
-    <label for="description">Description</label>
-    <input type="text" id="description" placeholder="Description" ng-model="foo">
-
+  <form  ng-show="form > 0" ng-submit="submit()" novalidate class="css-form">
+    <label for="title">Title</label><br>
+    <input type="text" id="title" placeholder="Title" ng-model="title" required><br>
+    <label for="author">Author</label><br>
+    <input type="text" id="author" placeholder="Author" ng-model="author" required><br>
+    <label for="imageURL">Image URL</label><br>
+    <input type="text" id="imageURL" placeholder="Image URL" ng-model="imageURL" required><br>
+    <label for="description">Description</label><br>
+    <input type="text" id="description" placeholder="Description" ng-model="foo" required><br>
     <input type="submit" value="Submit Post">
   </form>
-  <input type="search" placeholder="Search" ng-model="search">
 
-  <div ng-repeat="post in posts | filter:search | orderBy: sortBy ">
-      <p><h3>{{post.title}} | <a ng-click="upVote(post.votes)"><i class="fa fa-arrow-up"></i></a> <a href=""><i class="fa fa-arrow-down"></i></a> {{post.votes}}</h3></p>
-      <p><h5>{{post.author}}</h5></p>
-      <p>{{post.foo}}</p>
-      <img ng-src="{{post.imageURL}}" height="150" width="150">
-      <p>{{post.date}} | {{post. comments}} | <a>Add Comment</a></p>
+  <div ng-repeat="post in posts | filter:search | orderBy: sortBy" class="post" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+    <img ng-src="{{post.imageURL}}" height="150" width="150" class="image">
+      <div class="content">
+        <h3>{{post.title}}</h3> | <a ng-click="upVote(post)"><i class="fa fa-arrow-up"></i> </a> <a ng-click="downVote(post)"> <i class="fa fa-arrow-down"></i></a>  <h3 ng-class="{red: post.votes < 0, green: post.votes > 0}">  {{post.votes}}</h3>
+        <h5>{{post.author}}</h5>
+        <p>{{post.foo}}</p>
+        <p>{{post.date}} | <a ng-click="showComments()"><i class="fa fa-comment"></i> {{post.comments.length}} comments</a> | <a ng-click="newComment()"><i class="fa fa-pencil"></i> Add Comment</a></p>
+
+          <section ng-show="commentsBox > 0" ng-repeat="comment in post.comments">
+            <p>{{comment.cauthor}} - {{comment.message}}</p>
+          </section>
+
+          <form ng-show="newComForm > 0" ng-submit="addComment(post.comments)">
+            <label for="cauthor">Author</label>
+            <input type="text" id="cauthor" ng-model="cauthor">
+            <label for="message">Messasge</label>
+            <input type="text" id="message" ng-model="message">
+            <input type="submit" value="Submit">
+          </form>
+
+    </div>
   </div>
 
   <script src="./app.js"></script>
