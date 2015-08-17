@@ -1,6 +1,41 @@
-var app = angular.module("redditClone", []);
+var app = angular.module("redditClone", ['angularMoment']);
 app.controller("articles", function($scope) {
-  $scope.posts = [];
+  $scope.posts = [
+    {title: "A great tale",
+      author: "Maya Angelou",
+      imageURL: "https://unsplash.imgix.net/photo-1434145175661-472d90344c15?dpr=2&fit=crop&fm=jpg&h=800&q=75&w=1050",
+      foo: "This is a great description of the great tale",
+      newComForm: 0,
+      commentsBox: 0,
+      votes: 0,
+      form: 0,
+      date: new Date(),
+      comments: []
+    },
+    {title: "Forever and a Day",
+    author: "Ryne Emory",
+    imageURL: "https://unsplash.imgix.net/photo-1433785567155-bf5530cab72c?dpr=2&fit=crop&fm=jpg&h=775&q=75&w=1050",
+    foo: "What a great building with windows. Some are orange",
+    newComForm: 0,
+    commentsBox: 0,
+    votes: 0,
+    form: 0,
+    date: new Date(),
+    comments: []
+    },
+    {title: "What a wonderful world",
+    author: "Your mom",
+    imageURL: "https://unsplash.imgix.net/photo-1433256392503-913cee5877e3?dpr=2&fit=crop&fm=jpg&h=700&q=75&w=1050",
+    foo: "Wonderful Wonderful",
+    newComForm: 0,
+    commentsBox: 0,
+    votes: 0,
+    form: 0,
+    date: new Date(),
+    comments: []
+    }
+
+  ];
   $scope.title = "";
   $scope.form= 0;
   $scope.author = "";
@@ -19,13 +54,6 @@ app.controller("articles", function($scope) {
       post.votes = 0;
       post.comments = [];
       post.date = new Date()
-      // var rightNow = new Date()
-      // rightNow = Date.parse(rightNow)
-      // var difference = rightNow - post.date;
-      // console.log(rightNow)
-      // console.log(post.date)
-      // post.date = Math.floor(difference/85400000);
-
       $scope.posts.push(post)
       $scope.title = "";
       $scope.author = "";
@@ -40,6 +68,9 @@ app.controller("articles", function($scope) {
   $scope.showForm = function () {
     if ($scope.form === 0) {
       $scope.form = 1;
+    }
+    else {
+      $scope.form = 0;
     }
   }
 
@@ -68,7 +99,6 @@ app.controller("articles", function($scope) {
       comment.cauthor = this.cauthor;
       comment.message = this.message;
       comments.push(comment)
-      console.log(comments);
       this.newComForm = 0;
       this.cauthor = "";
       this.message = "";
@@ -78,14 +108,12 @@ app.controller("articles", function($scope) {
 
   $scope.upVote = function (post) {
     post.votes ++;
-    console.log(post)
     $scope.votes = post.votes
     ;
   }
 
   $scope.downVote = function (post) {
     post.votes --;
-    console.log(post);
     $scope.votes = post.votes
     ;
   }
