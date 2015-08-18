@@ -1,86 +1,203 @@
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: sans-serif;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
 body {
-  background-color: white;
-}
+  line-height: 1; }
 
-.post {
-  background-color: rgb(218, 218, 218);
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  height: 200px;
-  margin-left: 10%;
-  margin-bottom: 15px;
-  margin-top: 20px;
-}
+ol, ul {
+  list-style: none; }
 
-.red {
-  color: red;
-}
+blockquote, q {
+  quotes: none; }
 
-.green {
-  color: green;
-}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
 
-.ng-cloak {
-  display: none !important;
-}
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
 
-.css-form {
-  background-color: white;
-  width: 50%;
-  float: left;
-  padding: 30px;
-}
+form * {
+  display: block; }
 
-.css-form input.ng-invalid.ng-touched {
-    background-color: #FA787E;
-    border: 2px solid red;
-  }
+.ng-enter {
+  transition: 1s;
+  opacity: 0; }
 
-.animate-enter {
-  -webkit-trainsition: 2s linear all;
-  transition: 2s linear all;
-  opacity: 0;
-}
+.ng-enter-active {
+  opacity: 1; }
 
-.animate-enter.animate-enter-active {
-  opacity: 1;
-}
+.ng-leave {
+  transition: 1s;
+  opacity: 0; }
 
-.animate-leave {
-  -webkit-trainsition: 2s linear all;
-  transition: 2s linear all;
-  opacity: 0;
-}
+.ng-leave-active {
+  opacity: 1; }
 
-.animate-leave.animate-leave-active {
-  opacity: 1;
-}
+.ng-move {
+  transition: 1s;
+  opacity: 0; }
 
-h3, h1{
-  display: inline-block;
-
-}
-
-.image, .content {
-  float: left;
-}
-
-.image {
-  margin-right: 10px;
-}
-
-.grey {
-  color: rgb(145, 145, 145);
-}
+.ng-move-active {
+  opacity: 1; }
 
 h1 {
   margin-right: 50px;
   margin-left: 10px;
-  color:rgb(145, 145, 145);
-
-}
+  margin-top: 25px;
+  font-size: 28px;
+  color: #909090;
+  display: inline-block; }
 
 nav {
-  background-color: rgba(218,218,218, 0.5);
-}
+  background-color: rgba(218, 218, 218, 0.5);
+  height: 70px; }
+
+.grey {
+  color: #919191;
+  margin-right: 20px; }
+
+.css-form {
+  position: relative;
+  background-color: rgba(87, 87, 87, 0.5);
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 15px;
+  height: 500px; }
+  .css-form h2 {
+    text-align: center;
+    color: white;
+    line-height: 1.5;
+    font-size: 20px;
+    margin: 20px 0; }
+  .css-form label {
+    line-height: 1.5;
+    font-size: 16px;
+    color: white;
+    margin-left: 10%; }
+  .css-form input {
+    padding: 5px;
+    margin-left: 10%;
+    line-height: 1.5;
+    font-size: 14px; }
+  .css-form input[type="submit"] {
+    border: none;
+    background-color: #909090;
+    color: white;
+    padding: 15px;
+    font-size: 14px;
+    margin: 0 auto;
+    border: 2px solid white; }
+
+#imageURL, #description {
+  width: 50%; }
+
+.css-form input.ng-invalid.ng-touched {
+  background-color: #FA787E;
+  border: 2px solid red; }
+
+.post {
+  position: relative;
+  background-color: #dadada;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  min-height: 200px;
+  margin-left: 10%;
+  margin-bottom: 15px;
+  margin-top: 20px; }
+
+.red {
+  color: red; }
+
+.green {
+  color: green; }
+
+.image, .content {
+  float: left; }
+
+.content {
+  min-height: 150px; }
+
+.image {
+  margin-right: 10px;
+  height: 150px;
+  width: 150px;
+  margin-bottom: 20px; }
+
+.commentForm {
+  clear: both;
+  background-color: rgba(87, 87, 87, 0.5);
+  width: 100%;
+  height: 320px;
+  position: relative;
+  border-radius: 2px;
+  padding: 30px; }
+  .commentForm h3 {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 25px; }
+  .commentForm label {
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+    color: white; }
+  .commentForm input {
+    margin: 10px auto;
+    padding: 10px;
+    width: 50%;
+    line-height: 1.5;
+    font-size: 16px; }
+  .commentForm input[type="submit"] {
+    border: none;
+    background-color: #909090;
+    color: white;
+    padding: 15px;
+    font-size: 14px;
+    margin: 10px auto;
+    width: 20%;
+    border: 2px solid white; }
+
+.comment {
+  clear: both;
+  background-color: rgba(87, 87, 87, 0.5);
+  padding: 20px;
+  position: relative;
+  font-size: 14px;
+  margin: 15px;
+  min-height: 100px; }
+  .comment h3 {
+    color: white;
+    font-size: 18px;
+    margin: 10px; }
+  .comment p {
+    margin: 5px;
+    height: auto; }

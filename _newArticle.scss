@@ -1,0 +1,47 @@
+.css-form {
+  position: relative;
+  background-color: rgba(87, 87, 87,0.5);
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 15px;
+  height: 500px;
+
+  h2 {
+    text-align: center;
+    color:white;
+    line-height: 1.5;
+    font-size: 20px;
+    margin: 20px 0;
+  }
+
+  label {
+    line-height: 1.5;
+    font-size: 16px;
+    color: white;
+    margin-left: 10%;
+  }
+  input {
+    padding: 5px;
+    margin-left: 10%;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+
+  input[type="submit"] {
+    border: none;
+    background-color: rgb(144,144,144);
+    color: white;
+    padding: 15px;
+    font-size: 14px;
+    margin: 0 auto;
+    border: 2px solid white;
+  }
+
+}
+#imageURL, #description {
+   width: 50%;
+ }
+.css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+    border: 2px solid red;
+  }

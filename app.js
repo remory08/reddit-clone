@@ -1,4 +1,4 @@
-var app = angular.module("redditClone", ['angularMoment']);
+var app = angular.module("redditClone", ['angularMoment', 'ngAnimate']);
 app.controller("articles", function($scope) {
   $scope.posts = [
     {title: "A great tale",
@@ -7,9 +7,9 @@ app.controller("articles", function($scope) {
       foo: "This is a great description of the great tale",
       newComForm: 0,
       commentsBox: 0,
-      votes: 0,
+      votes: 10,
       form: 0,
-      date: new Date(),
+      date:"Sun Aug 16 2015 17:34:09 GMT-0600 (MDT)",
       comments: []
     },
     {title: "Forever and a Day",
@@ -18,7 +18,7 @@ app.controller("articles", function($scope) {
     foo: "What a great building with windows. Some are orange",
     newComForm: 0,
     commentsBox: 0,
-    votes: 0,
+    votes: 5,
     form: 0,
     date: new Date(),
     comments: []
@@ -29,7 +29,7 @@ app.controller("articles", function($scope) {
     foo: "Wonderful Wonderful",
     newComForm: 0,
     commentsBox: 0,
-    votes: 0,
+    votes: -2,
     form: 0,
     date: new Date(),
     comments: []
@@ -54,6 +54,7 @@ app.controller("articles", function($scope) {
       post.votes = 0;
       post.comments = [];
       post.date = new Date()
+      console.log(new Date())
       $scope.posts.push(post)
       $scope.title = "";
       $scope.author = "";
@@ -84,7 +85,6 @@ app.controller("articles", function($scope) {
   }
 
   $scope.newComment = function () {
-    console.log(this.newComForm);
     if (this.newComForm ===0) {
       this.newComForm = 1;
     }
@@ -108,13 +108,9 @@ app.controller("articles", function($scope) {
 
   $scope.upVote = function (post) {
     post.votes ++;
-    $scope.votes = post.votes
-    ;
   }
 
   $scope.downVote = function (post) {
     post.votes --;
-    $scope.votes = post.votes
-    ;
   }
 })

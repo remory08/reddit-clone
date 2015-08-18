@@ -8,6 +8,7 @@
   <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/angular-moment/angular-moment.js"></script>
+  <script src="./angular-animate.js"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,7 +19,7 @@
     <h1>Reddit Clone</h1>
     <a class="grey" ng-click="showForm()"><i class="fa fa-plus"></i> Submit Post</a>
     <input type="search" placeholder="Search" ng-model="search">
-    <select  ng-model="sortBy">
+    <select  ng-model="sortBy" ng-init="sortBy='-votes'">
       <option value="">-- Sort By --</option>
       <option value=-votes>Sort By Votes</option>
       <option value="title">Sort By Title</option>
@@ -27,6 +28,7 @@
   </nav>
 
   <form  ng-show="form > 0" ng-submit="submit()" novalidate class="css-form">
+    <h2>Add A New Article</h2>
     <label for="title">Title</label><br>
     <input type="text" id="title" placeholder="Title" ng-model="title" required><br>
     <label for="author">Author</label><br>
@@ -39,26 +41,31 @@
   </form>
 
   <div ng-repeat="post in posts | filter:search | orderBy: sortBy" class="post" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-    <img ng-src="{{post.imageURL}}" height="200" width="200" class="image">
+      <img ng-src="{{post.imageURL}}" class="image">
       <div class="content">
         <h3>{{post.title}}</h3> | <a ng-click="upVote(post)"><i class="fa fa-arrow-up"></i> </a> <a ng-click="downVote(post)"> <i class="fa fa-arrow-down"></i></a>  <h3 ng-class="{red: post.votes < 0, green: post.votes > 0}">  {{post.votes}}</h3>
         <h5>{{post.author}}</h5>
         <p>{{post.foo}}</p>
-        <p><i class="fa fa-calendar"></i> <span am-time-ago="post.date"></span> | <a ng-click="showComments()"><i class="fa fa-comment"></i> {{post.comments.length}} <ng-pluralize count="post.comments.length" when="{'1': 'comment', 'other': 'comments'}"> </ng-pluralize></a> | <a ng-click="newComment()"><i class="fa fa-pencil"></i> Add Comment</a></p>
+        <p><i class="fa fa-calendar"></i> <span>{{post.date | amCalendar}}</span> | <a ng-click="showComments()"><i class="fa fa-comment"></i> {{post.comments.length}} <ng-pluralize count="post.comments.length" when="{'1': 'comment', 'other': 'comments'}"> </ng-pluralize></a> | <a ng-click="newComment()"><i class="fa fa-pencil"></i> Add Comment</a></p>
+      </div>
 
-          <section ng-show="commentsBox > 0" ng-repeat="comment in post.comments">
-            <p>{{comment.cauthor}} - {{comment.message}}</p>
-          </section>
+      <section class="comment" ng-show="commentsBox > 0">
+        <h3>Comments for <em>{{post.title}}</em>:</h3>
+        <div ng-repeat="comment in post.comments">
+          <p><strong>{{comment.cauthor}}</strong> - {{comment.message}}</p>
+        </div>
+      </section>
 
-          <form ng-show="newComForm > 0" ng-submit="addComment(post.comments)">
-            <label for="cauthor">Author</label>
-            <input type="text" id="cauthor" ng-model="cauthor">
-            <label for="message">Messasge</label>
-            <input type="text" id="message" ng-model="message">
-            <input type="submit" value="Submit">
-          </form>
+      <form class="commentForm" ng-show="newComForm > 0" ng-submit="addComment(post.comments)">
+        <h3>Add Your Comment</h3>
+        <label for="cauthor">Author</label>
+        <input type="text" id="cauthor" ng-model="cauthor">
+        <label for="message">Messasge</label>
+        <input type="text" id="message" ng-model="message">
+        <input type="submit" value="Submit">
+      </form>
 
-    </div>
+
   </div>
 
   <script src="./app.js"></script>
