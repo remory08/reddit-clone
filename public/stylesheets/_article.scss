@@ -8,6 +8,10 @@
   margin-left: 10%;
   margin-bottom: 15px;
   margin-top: 20px;
+
+  p, h3, h5 {
+    line-height: 2;
+  }
 }
 
 .red {
@@ -24,6 +28,9 @@
 
 .content {
   min-height: 150px;
+  h3 {
+    display: inline !important;
+  }
 }
 
 .image {
@@ -31,4 +38,9 @@
   height:150px;
   width: 150px;
   margin-bottom: 20px;
+}
+
+.miniNav {
+  position: relative;
+  top: 30px;
 }

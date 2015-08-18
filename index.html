@@ -8,9 +8,9 @@
   <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/angular-moment/angular-moment.js"></script>
-  <script src="./angular-animate.js"></script>
+  <script src="public/javascripts/angular-animate.js"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="public/stylesheets/style.css">
 </head>
 
 <body class="ng-cloak"  ng-controller="articles">
@@ -43,10 +43,10 @@
   <div ng-repeat="post in posts | filter:search | orderBy: sortBy" class="post" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
       <img ng-src="{{post.imageURL}}" class="image">
       <div class="content">
-        <h3>{{post.title}}</h3> | <a ng-click="upVote(post)"><i class="fa fa-arrow-up"></i> </a> <a ng-click="downVote(post)"> <i class="fa fa-arrow-down"></i></a>  <h3 ng-class="{red: post.votes < 0, green: post.votes > 0}">  {{post.votes}}</h3>
+        <span class="line"><h3>{{post.title}}</h3> | <a ng-click="upVote(post)"><i class="fa fa-arrow-up"></i> </a> <a ng-click="downVote(post)"> <i class="fa fa-arrow-down"></i></a>  <h3 ng-class="{red: post.votes < 0, green: post.votes > 0}">  {{post.votes}}</h3></span>
         <h5>{{post.author}}</h5>
         <p>{{post.foo}}</p>
-        <p><i class="fa fa-calendar"></i> <span>{{post.date | amCalendar}}</span> | <a ng-click="showComments()"><i class="fa fa-comment"></i> {{post.comments.length}} <ng-pluralize count="post.comments.length" when="{'1': 'comment', 'other': 'comments'}"> </ng-pluralize></a> | <a ng-click="newComment()"><i class="fa fa-pencil"></i> Add Comment</a></p>
+        <p class="miniNav"><i class="fa fa-calendar"></i> <span>{{post.date | amCalendar}}</span> | <a ng-click="showComments()"><i class="fa fa-comment"></i> {{post.comments.length}} <ng-pluralize count="post.comments.length" when="{'1': 'comment', 'other': 'comments'}"> </ng-pluralize></a> | <a ng-click="newComment()"><i class="fa fa-pencil"></i> Add Comment</a></p>
       </div>
 
       <section class="comment" ng-show="commentsBox > 0">
@@ -68,7 +68,7 @@
 
   </div>
 
-  <script src="./app.js"></script>
+  <script src="public/javascripts/app.js"></script>
 
 </body>
 </html>
