@@ -1,44 +1,10 @@
-var app = angular.module("redditClone", ['angularMoment', 'ngAnimate']);
+var app = angular.module("redditClone", ['angularMoment', 'ngAnimate', 'firebase']);
 
 // TODO: We should have articles AND comments controllers
 
-app.controller("articles", function($scope) {
-  $scope.posts = [
-    {title: "A great tale",
-      author: "Maya Angelou",
-      imageURL: "https://unsplash.imgix.net/photo-1434145175661-472d90344c15?dpr=2&fit=crop&fm=jpg&h=800&q=75&w=1050",
-      foo: "Schlitz farm-to-table sartorial ennui. Trust fund 3 wolf moon listicle, YOLO jean shorts roof party shabby chic biodiesel deep v. ",
-      newComForm: 0,
-      commentsBox: 0,
-      votes: 10,
-      form: 0,
-      date:"Sun Aug 16 2015 17:34:09 GMT-0600 (MDT)",
-      comments: []
-    },
-    {title: "Forever and a Day",
-    author: "Ryne Emory",
-    imageURL: "https://unsplash.imgix.net/photo-1433785567155-bf5530cab72c?dpr=2&fit=crop&fm=jpg&h=775&q=75&w=1050",
-    foo: "Put a bird on it roof party slow-carb, Schlitz migas Portland try-hard Echo Park whatever.",
-    newComForm: 0,
-    commentsBox: 0,
-    votes: 5,
-    form: 0,
-    date: new Date(),
-    comments: []
-    },
-    {title: "What a wonderful world",
-    author: "Fred Armisen",
-    imageURL: "https://unsplash.imgix.net/photo-1433256392503-913cee5877e3?dpr=2&fit=crop&fm=jpg&h=700&q=75&w=1050",
-    foo: "Typewriter hoodie fanny pack jean shorts, flannel art party Brooklyn wayfarers butcher blog listicle small batch. ",
-    newComForm: 0,
-    commentsBox: 0,
-    votes: -2,
-    form: 0,
-    date: new Date(),
-    comments: []
-    }
-
-  ];
+app.controller("articles", ['$scope', '$firebaseArray', function($scope, $firebaseArray) {
+  var postsRef = new Firebase("https://ryne-redditclone.firebaseio.com/posts");
+  $scope.posts = $firebaseArray(postsRef);
   $scope.title = "";
   $scope.form= 0;
   $scope.author = "";
@@ -55,10 +21,10 @@ app.controller("articles", function($scope) {
       post.author = $scope.author
       post.imageURL = $scope.imageURL
       post.votes = 0;
-      post.comments = [];
       post.date = new Date()
-      console.log(new Date())
-      $scope.posts.push(post)
+      post.date = post.date.toString()
+      console.log(post.date)
+      $scope.posts.$add(post)
       $scope.title = "";
       $scope.author = "";
       $scope.imageURL = "";
@@ -98,12 +64,16 @@ app.controller("articles", function($scope) {
     }
   }
 
-  $scope.addComment = function (comments) {
+  $scope.addComment = function (post) {
+    if (post.comments === undefined) {
+      post.comments = [];
+    }
     if (this.cauthor && this.message) {
       var comment = {}
       comment.cauthor = this.cauthor;
       comment.message = this.message;
-      comments.push(comment)
+      post.comments.push(comment)
+      $scope.posts.$save(post)
       this.newComForm = 0;
       this.cauthor = "";
       this.message = "";
@@ -113,9 +83,11 @@ app.controller("articles", function($scope) {
 
   $scope.upVote = function (post) {
     post.votes ++;
+    $scope.posts.$save(post);
   }
 
   $scope.downVote = function (post) {
     post.votes --;
+    $scope.posts.$save(post);
   }
-})
+}])
